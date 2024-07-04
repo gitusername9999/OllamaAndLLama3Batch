@@ -15,7 +15,10 @@ IF %ERRORLEVEL% NEQ 0 (
     echo Downloading OllamaSetup.exe to %downloadPath%
     start /wait powershell.exe -Command "Invoke-WebRequest -Uri 'https://ollama.com/download/OllamaSetup.exe' -OutFile '%downloadPath%OllamaSetup.exe'"
     echo Download complete. Running OllamaSetup.exe from %downloadPath%OllamaSetup.exe
-    start /wait "" "%downloadPath%OllamaSetup.exe" & echo Ollama installed successfully.
+    start /wait "" "%downloadPath%OllamaSetup.exe" /silent /norestart & echo Ollama installed successfully.
+    echo wait for 10 seconds for Ollama installation to be fully completed and ready.
+    timeout /t 10
+    echo Ollama installation is fully completed and and ready.
 ) ELSE (
     echo Ollama is already installed.
 )
